@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#163247">
+  <meta name="description" content="Control financiero personal y empresarial">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>Mi Control Financiero</title>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brandmark">₱</div><div><strong>Mi Control</strong><small>Finanzas personales y negocio</small></div></div>
+  <button id="installBtn" class="button ghost hidden">Instalar app</button>
+</header>
+<main>
+  <section class="intro">
+    <p class="eyebrow">PANEL FINANCIERO</p>
+    <h1>Tu dinero, bajo control.</h1>
+    <p>Registra movimientos en segundos y revisa tus números con claridad.</p>
+  </section>
+
+  <section class="scopebar card">
+    <label for="scope">Ámbito financiero</label>
+    <select id="scope">
+      <option value="personal">Finanzas personales</option>
+      <option value="business">Negocio · SCT</option>
+      <option value="all">Vista consolidada</option>
+    </select>
+  </section>
+
+  <section class="metrics">
+    <article class="metric card"><span>Ingresos</span><strong id="incomeTotal">$0.00</strong><small>Registros del ámbito</small></article>
+    <article class="metric card"><span>Gastos</span><strong id="expenseTotal">$0.00</strong><small>Registros del ámbito</small></article>
+    <article class="metric card"><span>Flujo neto</span><strong id="netTotal">$0.00</strong><small>Ingresos menos gastos</small></article>
+  </section>
+
+  <section class="card capture">
+    <div class="section-heading"><div><p class="eyebrow">CAPTURA RÁPIDA</p><h2>Nuevo movimiento</h2></div><span class="pill">Confirmación previa</span></div>
+    <label for="naturalText">Escríbelo como un mensaje</label>
+    <textarea id="naturalText" rows="2" placeholder="Ej. Gasté 185 en gasolina con BBVA"></textarea>
+    <button id="interpretBtn" class="button secondary full">Interpretar texto</button>
+    <div class="or"><span>o completa el formulario</span></div>
+    <form id="movementForm">
+      <div class="form-grid">
+        <div><label for="scopeForm">Ámbito</label><select id="scopeForm"><option value="personal">Personal</option><option value="business">Negocio SCT</option></select></div>
+        <div><label for="type">Tipo</label><select id="type"><option>Gasto</option><option>Ingreso</option><option>Transferencia</option></select></div>
+        <div class="wide"><label for="amount">Importe (MXN)</label><input id="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required></div>
+        <div><label for="category">Categoría</label><select id="category"></select></div>
+        <div><label for="account">Cuenta</label><select id="account"></select></div>
+        <div id="destinationWrap" class="wide hidden"><label for="destination">Cuenta de destino (transferencia)</label><select id="destination"></select></div>
+        <div><label for="date">Fecha</label><input id="date" type="date" required></div>
+        <div><label for="description">Descripción</label><input id="description" type="text" placeholder="Detalle opcional"></div>
+      </div>
+      <p id="formError" class="error" role="alert"></p>
+      <button class="button primary full" type="submit">Revisar movimiento</button>
+    </form>
+  </section>
+
+  <section id="confirmPanel" class="card confirm hidden" aria-live="polite">
+    <p class="eyebrow">PASO FINAL</p><h2>Confirma los datos</h2>
+    <div id="confirmationDetails" class="confirm-details"></div>
+    <p class="hint">Nada se guarda hasta que confirmes. Verifica importe, ámbito y cuenta.</p>
+    <div class="actions"><button id="cancelConfirm" class="button ghost">Editar</button><button id="saveConfirm" class="button primary">Confirmar y guardar</button></div>
+  </section>
+
+  <section class="card">
+    <div class="section-heading"><div><p class="eyebrow">ACTIVIDAD</p><h2>Movimientos recientes</h2></div><button id="exportBtn" class="button ghost small">Exportar CSV</button></div>
+    <div id="movementList" class="movement-list"></div>
+    <div id="emptyState" class="empty">Todavía no hay movimientos. Registra el primero arriba.</div>
+    <button id="clearBtn" class="text-button">Borrar todos los datos de prueba</button>
+  </section>
+  <section class="privacy-note"><strong>Privacidad:</strong> esta versión guarda los datos en este navegador. No ingreses contraseñas bancarias. Exporta respaldos regularmente; al borrar datos del navegador podrías perder los registros.</section>
+</main>
+<nav class="bottom-nav"><a href="#top" aria-label="Inicio">⌂<span>Inicio</span></a><a href="#movementForm">＋<span>Registrar</span></a><a href="#movementList">▤<span>Movimientos</span></a></nav>
+<script src="app.js"></script>
+</body>
+</html>
